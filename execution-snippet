@@ -1,0 +1,10 @@
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)){ return; }
+    js = d.createElement(s); js.id = id;
+    js.onload = function(){
+        // remote script has loaded
+    };
+    js.src = "http://localhost:8080/build/tota11y.min.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'element-selector'));

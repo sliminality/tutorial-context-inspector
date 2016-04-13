@@ -9,11 +9,11 @@ require("./style.less");
 
 class A11yTextWand extends Plugin {
     getTitle() {
-        return "Screen Reader Wand";
+        return "Highlight Elements";
     }
 
     getDescription() {
-        return "Hover over elements to view them as a screen reader would";
+        return "Hover over elements to view their CSS";
     }
 
     run() {
@@ -34,7 +34,7 @@ class A11yTextWand extends Plugin {
             if (!textAlternative) {
                 $(".tota11y-info-section.active").html(
                     <i className="tota11y-nothingness">
-                        No text visible to a screen reader
+                        Nothing available
                     </i>
                 );
             } else {

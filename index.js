@@ -57,7 +57,7 @@ class Toolbar {
             $experimentalPlugins = (
                 <div>
                     <div className="tota11y-plugins-separator">
-                        Experimental
+                        Menu
                     </div>
                     {
                         plugins.experimental.map((Plugin) => { // eslint-disable-line no-unused-vars
