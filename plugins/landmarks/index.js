@@ -8,16 +8,16 @@ let annotate = require("../shared/annotate")("landmarks");
 
 class LandmarksPlugin extends Plugin {
     getTitle() {
-        return "Landmarks";
+        return "Components";
     }
 
     getDescription() {
-        return "Labels all ARIA landmarks";
+        return "Labels tutorial components on page";
     }
 
     run() {
         $("[role]:not(.tota11y-toolbar,.tota11y-plugin)").each(function() {
-            annotate.label($(this), $(this).attr("role"));
+            annotate.label($(this), $(this).prop("tagName").toLowerCase());
         });
     }
 

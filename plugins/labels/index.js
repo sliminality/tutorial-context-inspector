@@ -15,7 +15,7 @@ class LabelsPlugin extends Plugin {
     }
 
     getDescription() {
-        return "Identifies inputs with missing labels";
+        return "Identifies components of a layout";
     }
 
     errorMessage($el) {

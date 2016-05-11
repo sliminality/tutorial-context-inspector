@@ -96,7 +96,7 @@ class Toolbar {
         );
 
         $toolbar = (
-            <div id="tota11y-toolbar" className="tota11y tota11y-toolbar"
+            <div id="tota11y-toolbar" className="tota11y tota11y-toolbar tota11y-expanded"
                  role="region"
                  aria-expanded="false">
                 <div className="tota11y-toolbar-body">
@@ -115,4 +115,5 @@ $(function() {
 
     // TODO: Make this customizable
     bar.appendTo($("body"));
+    bar.panel.render();
 });
