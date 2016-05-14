@@ -98,7 +98,7 @@ class Plugin {
      */
     deactivate() {
         this.cleanup();
-        // this.panel.destroy();
+        this.panel.destroy();
 
         this.$checkbox.prop("checked", false);
     }

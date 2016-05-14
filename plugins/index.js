@@ -7,7 +7,7 @@
 // let AltTextPlugin = require("./alt-text");
 // let ContrastPlugin = require("./contrast");
 // let HeadingsPlugin = require("./headings");
-// let LabelsPlugin = require("./labels");
+let LabelsPlugin = require("./labels");
 let LandmarksPlugin = require("./landmarks");
 // let LinkTextPlugin = require("./link-text");
 let A11yTextWand = require("./a11y-text-wand");
@@ -23,7 +23,7 @@ module.exports = {
 
     experimental: [
         new A11yTextWand(),
-        // new LabelsPlugin(),
+        new LabelsPlugin(),
         new LandmarksPlugin(),
     ],
 };

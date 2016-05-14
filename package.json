@@ -37,5 +37,8 @@
     "test": "mocha --require test/babel-hook test/*.js",
     "live-test": "webpack-dev-server --config webpack.config.babel.js --hot --inline"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.12.0"
+  }
 }

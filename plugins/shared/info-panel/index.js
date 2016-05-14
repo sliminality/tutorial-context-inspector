@@ -196,7 +196,7 @@ class InfoPanel {
                             Annotate:
                             {" "}
                             <input
-                                className="toggle-annotation"
+                                className="tota11y toggle-annotation"
                                 type="checkbox"
                                 checked="checked" />
                         </label>

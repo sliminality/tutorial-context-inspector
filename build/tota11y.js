@@ -9,7 +9,7 @@
  * Released under the MIT license
  * http://github.com/Khan/tota11y/blob/master/LICENSE.txt
  * 
- * Date: 2016-05-06
+ * Date: 2016-05-11
  * 
  */
 /******/ (function(modules) { // webpackBootstrap
@@ -79,10 +79,10 @@
 	var $ = __webpack_require__(/*! jquery */ 4);
 
 	var plugins = __webpack_require__(/*! ./plugins */ 9);
-	var logoTemplate = __webpack_require__(/*! ./templates/logo.handlebars */ 33);
+	var logoTemplate = __webpack_require__(/*! ./templates/logo.handlebars */ 34);
 
 	// Chrome Accessibility Developer Tools - required once as a global
-	__webpack_require__(/*! script!./~/accessibility-developer-tools/dist/js/axs_testing.js */ 34);
+	__webpack_require__(/*! script!./~/accessibility-developer-tools/dist/js/axs_testing.js */ 35);
 
 	var Toolbar = (function () {
 	    function Toolbar() {
@@ -177,7 +177,7 @@
 
 	            $toolbar = buildElement(
 	                "div",
-	                { id: "tota11y-toolbar", className: "tota11y tota11y-toolbar",
+	                { id: "tota11y-toolbar", className: "tota11y tota11y-toolbar tota11y-expanded",
 	                    role: "region",
 	                    "aria-expanded": "false" },
 	                buildElement(
@@ -10703,7 +10703,7 @@
 	        key: "deactivate",
 	        value: function deactivate() {
 	            this.cleanup();
-	            this.panel.destroy();
+	            // this.panel.destroy();
 
 	            this.$checkbox.prop("checked", false);
 	        }
@@ -12256,7 +12256,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(/*! ./../../../~/css-loader/lib/css-base.js */ 7)();
-	exports.push([module.id, ".tota11y-dark-color-scheme {\n  background-color: #333 !important;\n  color: #f2f2f2 !important;\n}\n.tota11y-no-select {\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n}\n.tota11y-info {\n  background-color: #333 !important;\n  color: #f2f2f2 !important;\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n  border-radius: 5px !important;\n  position: fixed !important;\n  z-index: 9998 !important;\n}\n.tota11y-info-controls {\n  float: right !important;\n}\n.tota11y-info-annotation-toggle {\n  float: left !important;\n  margin-right: 10px !important;\n}\n.tota11y-info-hidden {\n  display: none !important;\n}\n.tota11y-info-dismiss-trigger {\n  font-size: 25px !important;\n  line-height: 25px !important;\n  position: relative !important;\n  top: -2px !important;\n}\n.tota11y-info-title,\n.tota11y-info-body {\n  padding: 10px 10px 0 !important;\n}\n.tota11y-info-title:hover {\n  cursor: move !important;\n}\n.tota11y-info-tabs {\n  display: -webkit-box !important;\n  display: flex !important;\n  margin: 0 !important;\n  padding: 0 0 10px !important;\n}\n.tota11y-info-tab {\n  height: 30px !important;\n  list-style: none !important;\n  position: relative !important;\n  text-align: center !important;\n  width: 100% !important;\n}\n.tota11y-info-tab-anchor {\n  position: absolute !important;\n  top: 0 !important;\n  right: 0 !important;\n  bottom: 0 !important;\n  left: 0 !important;\n  text-align: center !important;\n}\n.tota11y-info-tab-anchor-text {\n  line-height: 30px !important;\n}\n.tota11y-info-tab:hover {\n  background-color: #555 !important;\n}\n.tota11y-info-tab.active,\n.tota11y-info-tab.active:hover {\n  background-color: #f2f2f2 !important;\n}\n.tota11y-info-tab.active .tota11y-info-tab-anchor-text {\n  color: #333 !important;\n}\n.tota11y-info-sections {\n  position: relative !important;\n  height: 500px !important;\n  width: 300px !important;\n}\n.tota11y-info-section {\n  position: absolute !important;\n  top: 0 !important;\n  right: 0 !important;\n  bottom: 0 !important;\n  left: 0 !important;\n  background-color: #f2f2f2 !important;\n  display: none !important;\n  overflow-y: scroll !important;\n  padding: 10px !important;\n}\n.tota11y-info-section,\n.tota11y-info-section * {\n  color: #333 !important;\n}\n.tota11y-info-section.active {\n  display: block !important;\n}\n.tota11y-info-errors {\n  margin: 0 !important;\n  padding: 0 !important;\n}\n.tota11y-info-error {\n  list-style: none !important;\n  margin-bottom: 10px !important;\n}\n.tota11y-info-error-trigger {\n  display: block !important;\n}\n.tota11y-info-error-trigger.trigger-highlight {\n  background-color: rgba(120, 130, 200, 0.4) !important;\n}\n.tota11y-info-error-chevron {\n  display: inline-block !important;\n  font-size: 20px !important;\n  height: 14px !important;\n  line-height: 14px !important;\n  margin-right: 3px !important;\n  -webkit-transform: rotateZ(90deg) !important;\n          transform: rotateZ(90deg) !important;\n  -webkit-transform-origin: 3px 8px !important;\n          transform-origin: 3px 8px !important;\n  -webkit-transition: -webkit-transform ease-in-out 50ms !important;\n          transition: transform ease-in-out 50ms !important;\n}\n.tota11y-info-error-trigger.tota11y-collapsed .tota11y-info-error-chevron {\n  -webkit-transform: rotateZ(0deg) !important;\n          transform: rotateZ(0deg) !important;\n}\n.tota11y-info-error-title {\n  font-weight: bold !important;\n}\n.tota11y-info-error-scroll {\n  float: right !important;\n  margin-top: 3px !important;\n  padding-left: 5px !important;\n}\n.tota11y-info-error-scroll-glyph {\n  border-color: #333 !important;\n}\n.tota11y-info-error-scroll:hover .tota11y-info-error-scroll-glyph {\n  border-color: #999 !important;\n}\n.tota11y-info-error-scroll-lens {\n  border: 1px solid !important;\n  border-radius: 50% !important;\n  height: 8px !important;\n  width: 8px !important;\n}\n.tota11y-info-error-scroll-handle {\n  border-left: 1px solid !important;\n  height: 7px !important;\n  -webkit-transform: translateX(-2px) translateY(-2px) rotate(45deg) !important;\n          transform: translateX(-2px) translateY(-2px) rotate(45deg) !important;\n  width: 1px !important;\n}\n.tota11y-info-error-description {\n  font-size: 13px !important;\n  padding: 10px 0 0 !important;\n  -webkit-user-select: text !important;\n     -moz-user-select: text !important;\n      -ms-user-select: text !important;\n          user-select: text !important;\n}\n.tota11y-info-error-description-code-container {\n  margin-top: 10px !important;\n}\n.tota11y-info-error-description-code-container code {\n  display: block !important;\n  margin-top: 10px !important;\n  padding: 5px 10px !important;\n  word-wrap: break-word !important;\n}\n.tota11y-info-error-description.tota11y-collapsed {\n  display: none !important;\n}\n.tota11y-info-error-count {\n  background-color: red !important;\n  border-radius: 20px !important;\n  color: white !important;\n  display: inline !important;\n  margin-left: 5px !important;\n  padding: 1px 8px !important;\n}\n", ""]);
+	exports.push([module.id, ".tota11y-dark-color-scheme {\n  background-color: #333 !important;\n  color: #f2f2f2 !important;\n}\n.tota11y-no-select {\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n}\n.tota11y-info {\n  background-color: #333 !important;\n  color: #f2f2f2 !important;\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n  border-radius: 5px !important;\n  position: fixed !important;\n  z-index: 9998 !important;\n}\n.tota11y-info-controls {\n  float: right !important;\n}\n.tota11y-info-annotation-toggle {\n  float: left !important;\n  margin-right: 10px !important;\n}\n.tota11y-info-hidden {\n  display: none !important;\n}\n.tota11y-info-dismiss-trigger {\n  font-size: 25px !important;\n  line-height: 25px !important;\n  position: relative !important;\n  top: -2px !important;\n}\n.tota11y-info-title,\n.tota11y-info-body {\n  padding: 10px 10px 0 !important;\n}\n.tota11y-info-title:hover {\n  cursor: move !important;\n}\n.tota11y-info-tabs {\n  display: -webkit-box !important;\n  display: flex !important;\n  margin: 0 !important;\n  padding: 0 0 10px !important;\n}\n.tota11y-info-tab {\n  height: 30px !important;\n  list-style: none !important;\n  position: relative !important;\n  text-align: center !important;\n  width: 100% !important;\n}\n.tota11y-info-tab-anchor {\n  position: absolute !important;\n  top: 0 !important;\n  right: 0 !important;\n  bottom: 0 !important;\n  left: 0 !important;\n  text-align: center !important;\n}\n.tota11y-info-tab-anchor-text {\n  line-height: 30px !important;\n}\n.tota11y-info-tab:hover {\n  background-color: #555 !important;\n}\n.tota11y-info-tab.active,\n.tota11y-info-tab.active:hover {\n  background-color: #f2f2f2 !important;\n}\n.tota11y-info-tab.active .tota11y-info-tab-anchor-text {\n  color: #333 !important;\n}\n.tota11y-info-sections {\n  position: relative !important;\n  height: 300px !important;\n  width: 300px !important;\n}\n.tota11y-info-section {\n  position: absolute !important;\n  top: 0 !important;\n  right: 0 !important;\n  bottom: 0 !important;\n  left: 0 !important;\n  background-color: #f2f2f2 !important;\n  display: none !important;\n  overflow-y: scroll !important;\n  padding: 10px !important;\n}\n.tota11y-info-section,\n.tota11y-info-section * {\n  color: #333 !important;\n}\n.tota11y-info-section.active {\n  display: block !important;\n}\n.tota11y-info-errors {\n  margin: 0 !important;\n  padding: 0 !important;\n}\n.tota11y-info-error {\n  list-style: none !important;\n  margin-bottom: 10px !important;\n}\n.tota11y-info-error-trigger {\n  display: block !important;\n}\n.tota11y-info-error-trigger.trigger-highlight {\n  background-color: rgba(120, 130, 200, 0.4) !important;\n}\n.tota11y-info-error-chevron {\n  display: inline-block !important;\n  font-size: 20px !important;\n  height: 14px !important;\n  line-height: 14px !important;\n  margin-right: 3px !important;\n  -webkit-transform: rotateZ(90deg) !important;\n          transform: rotateZ(90deg) !important;\n  -webkit-transform-origin: 3px 8px !important;\n          transform-origin: 3px 8px !important;\n  -webkit-transition: -webkit-transform ease-in-out 50ms !important;\n          transition: transform ease-in-out 50ms !important;\n}\n.tota11y-info-error-trigger.tota11y-collapsed .tota11y-info-error-chevron {\n  -webkit-transform: rotateZ(0deg) !important;\n          transform: rotateZ(0deg) !important;\n}\n.tota11y-info-error-title {\n  font-weight: bold !important;\n}\n.tota11y-info-error-scroll {\n  float: right !important;\n  margin-top: 3px !important;\n  padding-left: 5px !important;\n}\n.tota11y-info-error-scroll-glyph {\n  border-color: #333 !important;\n}\n.tota11y-info-error-scroll:hover .tota11y-info-error-scroll-glyph {\n  border-color: #999 !important;\n}\n.tota11y-info-error-scroll-lens {\n  border: 1px solid !important;\n  border-radius: 50% !important;\n  height: 8px !important;\n  width: 8px !important;\n}\n.tota11y-info-error-scroll-handle {\n  border-left: 1px solid !important;\n  height: 7px !important;\n  -webkit-transform: translateX(-2px) translateY(-2px) rotate(45deg) !important;\n          transform: translateX(-2px) translateY(-2px) rotate(45deg) !important;\n  width: 1px !important;\n}\n.tota11y-info-error-description {\n  font-size: 13px !important;\n  padding: 10px 0 0 !important;\n  -webkit-user-select: text !important;\n     -moz-user-select: text !important;\n      -ms-user-select: text !important;\n          user-select: text !important;\n}\n.tota11y-info-error-description-code-container {\n  margin-top: 10px !important;\n}\n.tota11y-info-error-description-code-container code {\n  display: block !important;\n  margin-top: 10px !important;\n  padding: 5px 10px !important;\n  word-wrap: break-word !important;\n}\n.tota11y-info-error-description.tota11y-collapsed {\n  display: none !important;\n}\n.tota11y-info-error-count {\n  background-color: red !important;\n  border-radius: 20px !important;\n  color: white !important;\n  display: inline !important;\n  margin-left: 5px !important;\n  padding: 1px 8px !important;\n}\n", ""]);
 
 /***/ },
 /* 28 */
@@ -12317,8 +12317,9 @@
 
 	var $ = __webpack_require__(/*! jquery */ 4);
 	var Plugin = __webpack_require__(/*! ../base */ 11);
+	var CSS_PROPERTIES = __webpack_require__(/*! ./constants */ 31);
 
-	__webpack_require__(/*! ./style.less */ 31);
+	__webpack_require__(/*! ./style.less */ 32);
 
 	var A11yTextWand = (function (_Plugin) {
 	    _inherits(A11yTextWand, _Plugin);
@@ -12348,43 +12349,61 @@
 	            this.panel.render();
 
 	            $(document).on("mousemove.wand", function (e) {
-	                var element = document.elementFromPoint(e.clientX, e.clientY);
-	                var properties = window.getComputedStyle(element, null);
-	                var prefix = /\-webkit\-/;
-	                var allCSSProperties = [];
+	                var currentEl = document.elementFromPoint(e.clientX, e.clientY);
 
-	                for (var s = 0; s < properties.length; s++) {
-	                    var property = properties[s];
+	                // Don't outline something if it's part of the app
+	                if (currentEl.className.indexOf("tota11y") === -1) {
+	                    $(".tota11y-outlined").removeClass("tota11y-outlined");
+	                    $(currentEl).addClass("tota11y-outlined");
 
-	                    if (prefix.test(property)) {
-	                        // Ignore prefixed properties
-	                        continue;
-	                    }
+	                    $(document).on("click.wand", function (evt) {
 
-	                    if (allCSSProperties.indexOf(property) === -1) {
-	                        // Make sure not to duplicate
-	                        var pair = {};
-	                        pair[property] = properties[property];
-	                        allCSSProperties.push(JSON.stringify(pair));
-	                    }
-	                }
+	                        var parentEl = currentEl.parentNode;
+	                        var parentElProperties = window.getComputedStyle(parentEl, null);
+	                        var currentElProperties = window.getComputedStyle(currentEl, null);
+	                        var prefix = /\-webkit\-/;
+	                        var allCSSProperties = {};
 
-	                var textAlternative = allCSSProperties.toString();
+	                        for (var s = 0; s < currentElProperties.length; s++) {
+	                            var property = currentElProperties[s];
+	                            var propVal = currentElProperties.getPropertyValue(property);
 
-	                // let textAlternative = axs.properties.findTextAlternatives(
-	                // element, {});
+	                            if (prefix.test(property)) {
+	                                // Ignore prefixed properties
+	                                continue;
+	                            }
 
-	                $(".tota11y-outlined").removeClass("tota11y-outlined");
-	                $(element).addClass("tota11y-outlined");
+	                            // Filter out inherited computed styles
+	                            var parVal = parentElProperties.getPropertyValue(property);
+	                            if (propVal !== parVal) {
+	                                if (!(property in allCSSProperties)) {
+	                                    // Make sure not to duplicate
+	                                    allCSSProperties[property] = propVal;
+	                                }
+	                            }
+	                        }
 
-	                if (!textAlternative) {
-	                    $(".tota11y-info-section.active").html(buildElement(
-	                        "i",
-	                        { className: "tota11y-nothingness" },
-	                        "Nothing available"
-	                    ));
-	                } else {
-	                    $(".tota11y-info-section.active").text(textAlternative);
+	                        var styleStrings = "";
+	                        for (var prop in allCSSProperties) {
+	                            if (allCSSProperties.hasOwnProperty(prop)) {
+	                                var liString = "<li class=\"tota11y\"><strong class=\"tota11y style-list-property\">" + prop + ":</strong> " + allCSSProperties[prop] + "</li>";
+	                                styleStrings += liString;
+	                                console.log(liString);
+	                            }
+	                        }
+
+	                        var textAlternative = "<ul class=\"style-list tota11y\">" + styleStrings + "</ul>";
+
+	                        if (!textAlternative) {
+	                            $(".tota11y-info-section.active").html(buildElement(
+	                                "i",
+	                                { className: "tota11y-nothingness" },
+	                                "Nothing available"
+	                            ));
+	                        } else {
+	                            $(".tota11y-info-section.active").html(textAlternative);
+	                        }
+	                    });
 	                }
 	            });
 	        }
@@ -12404,6 +12423,24 @@
 
 /***/ },
 /* 31 */
+/*!*********************************************!*\
+  !*** ./plugins/a11y-text-wand/constants.js ***!
+  \*********************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var CSS_PROPERTIES = {
+	    'POSITION': ['position', 'top', 'right', 'bottom', 'left', 'z-index', 'vertical-align', 'transform'],
+	    'BOX_MODEL': ['display', 'float', 'width', 'height', 'max-width', 'max-height', 'min-width', 'min-height', 'padding', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'margin', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'margin-collapse', 'margin-top-collapse', 'margin-right-collapse', 'margin-bottom-collapse', 'margin-left-collapse', 'overflow', 'overflow-x', 'overflow-y', 'clip', 'clear', 'box-align', 'box-flex', 'box-orient', 'box-pack', 'box-shadow', 'box-sizing', 'table-layout'],
+	    'TYPOGRAPHY': ['font', 'font-family', 'font-size', 'font-smoothing', 'osx-font-smoothing', 'font-style', 'font-weight', 'hyphens', 'src', 'line-height', 'letter-spacing', 'word-spacing', 'color', 'text-align', 'text-decoration', 'text-indent', 'text-overflow', 'text-rendering', 'text-size-adjust', 'text-shadow', 'text-transform', 'word-break', 'word-wrap', 'white-space', 'list-style', 'list-style-type', 'list-style-position', 'list-style-image'],
+	    'VISUAL': ['background', 'background-attachment', 'background-color', 'background-image', 'background-position', 'background-repeat', 'background-size', 'border', 'border-collapse', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border-color', 'border-image', 'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color', 'border-spacing', 'border-style', 'border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style', 'border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'border-radius', 'border-top-right-radius', 'border-bottom-right-radius', 'border-bottom-left-radius', 'border-top-left-radius', 'border-radius-topright', 'border-radius-bottomright', 'border-radius-bottomleft', 'border-radius-topleft', 'visibility']
+	};
+
+	module.exports = CSS_PROPERTIES;
+
+/***/ },
+/* 32 */
 /*!*******************************************!*\
   !*** ./plugins/a11y-text-wand/style.less ***!
   \*******************************************/
@@ -12412,7 +12449,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/postcss-loader!./../../~/autoprefixer-loader?{browsers:['> 1%']}!./../../~/less-loader!./style.less */ 32);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./../../~/postcss-loader!./../../~/autoprefixer-loader?{browsers:['> 1%']}!./../../~/less-loader!./style.less */ 33);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 8)(content, {});
@@ -12429,7 +12466,7 @@
 	}
 
 /***/ },
-/* 32 */
+/* 33 */
 /*!*****************************************************************************************************************************************!*\
   !*** ./~/css-loader!./~/postcss-loader!./~/autoprefixer-loader?{browsers:['> 1%']}!./~/less-loader!./plugins/a11y-text-wand/style.less ***!
   \*****************************************************************************************************************************************/
@@ -12439,7 +12476,7 @@
 	exports.push([module.id, ".tota11y-dark-color-scheme {\n  background-color: #333 !important;\n  color: #f2f2f2 !important;\n}\n.tota11y-no-select {\n  -webkit-user-select: none !important;\n     -moz-user-select: none !important;\n      -ms-user-select: none !important;\n          user-select: none !important;\n}\n.tota11y-outlined {\n  outline: 2px solid #7882c8 !important;\n}\n.tota11y-nothingness {\n  color: #888 !important;\n}\n", ""]);
 
 /***/ },
-/* 33 */
+/* 34 */
 /*!***********************************!*\
   !*** ./templates/logo.handlebars ***!
   \***********************************/
@@ -12452,16 +12489,16 @@
 	},"useData":true});
 
 /***/ },
-/* 34 */
+/* 35 */
 /*!**********************************************************************************!*\
   !*** ./~/script-loader!./~/accessibility-developer-tools/dist/js/axs_testing.js ***!
   \**********************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(/*! !./~/script-loader/addScript.js */ 35)(__webpack_require__(/*! !./~/raw-loader!./~/accessibility-developer-tools/dist/js/axs_testing.js */ 36)+"\n\n// SCRIPT-LOADER FOOTER\n//# sourceURL=script:///Users/sarah/git/tota11y/node_modules/accessibility-developer-tools/dist/js/axs_testing.js")
+	__webpack_require__(/*! !./~/script-loader/addScript.js */ 36)(__webpack_require__(/*! !./~/raw-loader!./~/accessibility-developer-tools/dist/js/axs_testing.js */ 37)+"\n\n// SCRIPT-LOADER FOOTER\n//# sourceURL=script:///Users/sarah/git/tota11y/node_modules/accessibility-developer-tools/dist/js/axs_testing.js")
 
 /***/ },
-/* 35 */
+/* 36 */
 /*!**************************************!*\
   !*** ./~/script-loader/addScript.js ***!
   \**************************************/
@@ -12479,7 +12516,7 @@
 	}
 
 /***/ },
-/* 36 */
+/* 37 */
 /*!*******************************************************************************!*\
   !*** ./~/raw-loader!./~/accessibility-developer-tools/dist/js/axs_testing.js ***!
   \*******************************************************************************/

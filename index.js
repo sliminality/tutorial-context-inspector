@@ -115,5 +115,4 @@ $(function() {
 
     // TODO: Make this customizable
     bar.appendTo($("body"));
-    bar.panel.render();
 });
