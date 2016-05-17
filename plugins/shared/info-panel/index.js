@@ -55,6 +55,7 @@ class InfoPanel {
      */
     addError(title, $description, $el) {
         let error = {title, $description, $el};
+        console.log(error);
         this.errors.push(error);
         return error;
     }

@@ -71,6 +71,8 @@ class A11yTextWand extends Plugin {
             const partition = el2Partition(clickedEl);
             const propTypeOrder = ["position", "box_model", "typography", "visual", "misc"];
 
+            console.log(partition);
+
             // Iterate through partition, getting rid of empty lists
             let styleStrings = "";
             propTypeOrder.forEach((propType) => {
