@@ -71,16 +71,18 @@ class A11yTextWand extends Plugin {
         });
 
         // Click handler gets and displays CSS information
-        $(document).click(function(e) {
-            const clickedEl = e.target;
+        $(document).on("click", ".tota11y-outlined", function(e) {
 
             // Stop propagation if we clicked an app element
-            if (clickedEl.className.indexOf("tota11y") !== -1 &&
-                clickedEl.className.indexOf("tota11y-outlined") === -1) {
+            if (this.className.indexOf("tota11y") !== -1 &&
+                this.className.indexOf("tota11y-outlined") === -1) {
                 console.log("clicked on app");
-                e.preventDefault();
+                // e.preventDefault();
                 e.stopPropagation();
             }
+
+            const clickedEl = this;
+            console.log(clickedEl);
 
             const partition = el2Partition(clickedEl);
             const propTypeOrder = [
@@ -100,7 +102,7 @@ class A11yTextWand extends Plugin {
             propTypeOrder.forEach(function (type) {
                 const props = partition[type];
                 if (Object.keys(props).length > 0) {
-                    const title = type;  // TODO: change this
+                    const title = type.replace("_", " ");  // TODO: change this
                     const $el = $(clickedEl);
 
                     // Evaluate the prop list template
@@ -109,8 +111,6 @@ class A11yTextWand extends Plugin {
                     propObjList.push(propObj);
                 }
             }, that);
-
-            console.log(that);
 
             let propEntries = that.props(propObjList);
             propEntries.forEach((entry) => {

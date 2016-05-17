@@ -256,7 +256,6 @@ class InfoPanel {
             let $propsTab;
 
             this.props.forEach((prop, i) => {
-                console.log(prop);
                 // a prop takes the form
                 // { title, $propList, $el }
 
@@ -269,7 +268,7 @@ class InfoPanel {
                     .find(".tota11y-info-error-description")
                     .prepend(prop.$list);
 
-                $props.append(prop.$list);
+                $props.append($prop);
 
                 // Wire up the expand/collapse trigger
                 let $trigger = $prop.find(".tota11y-info-error-trigger");
@@ -329,6 +328,8 @@ class InfoPanel {
                 annotate.toggleHighlight(prop.$el, $trigger);
                 annotate.toggleHighlight(prop.$el, $scroll);
             });
+
+            console.log($propsTab);
 
             $propsTab = $activeTab = this._addTab("Properties", $props);
         }
