@@ -10,8 +10,11 @@
  */
 
 let InfoPanel = require("./shared/info-panel");
+const cssPropTypes = require("./a11y-text-wand/cssPropTypes");
 
 require("./style.less");
+
+const MAX_PROP_TYPES = Object.keys(cssPropTypes).length;
 
 class Plugin {
     constructor() {
@@ -44,7 +47,16 @@ class Plugin {
 
     // Adds an entry to the info panel's "Errors" tab
     error(title, $description, $el) {
-        return this.panel.addError(title, $description, $el);
+        if (this.panel.errors.length > MAX_PROP_TYPES) {
+            return false;
+        } else {
+            return this.panel.addError(title, $description, $el);
+        }
+    }
+
+    // Replaces the entries in the info panel's "Props" tab
+    props(propObjs) {
+        return this.panel.setProps(propObjs);
     }
 
     /**

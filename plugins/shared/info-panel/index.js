@@ -18,6 +18,7 @@ let $ = require("jquery");
 let annotate = require("../annotate")("info-panel");
 
 let errorTemplate = require("./error.handlebars");
+const propTemplate = require("./props.handlebars");
 require("./style.less");
 
 const INITIAL_PANEL_MARGIN_PX = 10;
@@ -31,6 +32,7 @@ class InfoPanel {
         this.about = null;
         this.summary = null;
         this.errors = [];
+        this.props = [];
 
         this.$el = null;
     }
@@ -55,9 +57,19 @@ class InfoPanel {
      */
     addError(title, $description, $el) {
         let error = {title, $description, $el};
-        console.log(error);
         this.errors.push(error);
         return error;
+    }
+
+    /*
+        Replaces the prop list with a set of props.
+
+        Receives an array of objects of the form:
+        { title, $propList, $el }
+     */
+    setProps(props) {
+        this.props = props;
+        return props;
     }
 
     _addTab(title, html) {
@@ -235,6 +247,94 @@ class InfoPanel {
             }
         });
 
+        // Prop list
+        if (this.props.length > 0) {
+            let $props = $("<ul>").addClass("tota11y-info-errors");
+
+            // Store a reference to the "Props" tab so we can switch to it
+            // later
+            let $propsTab;
+
+            this.props.forEach((prop, i) => {
+                console.log(prop);
+                // a prop takes the form
+                // { title, $propList, $el }
+
+                let $prop = $(propTemplate(prop));
+
+                // Insert description jQuery object into template.
+                // Description is passed as jQuery object
+                // so that functionality can be inserted.
+                $prop
+                    .find(".tota11y-info-error-description")
+                    .prepend(prop.$list);
+
+                $props.append(prop.$list);
+
+                // Wire up the expand/collapse trigger
+                let $trigger = $prop.find(".tota11y-info-error-trigger");
+                let $desc = $prop.find(".tota11y-info-error-description");
+
+                $trigger.click((e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $trigger.toggleClass(COLLAPSED_CLASS_NAME);
+                    $desc.toggleClass(COLLAPSED_CLASS_NAME);
+                });
+
+                // Attach a function to the original error object to open
+                // this error so it can be done externally. We'll use this to
+                // access error entries in the info panel from labels.
+                prop.show = () => {
+                    // Make sure info panel is visible
+                    this.$el.removeClass(HIDDEN_CLASS_NAME);
+
+                    // Open the error entry
+                    $trigger.removeClass(COLLAPSED_CLASS_NAME);
+                    $desc.removeClass(COLLAPSED_CLASS_NAME);
+
+                    // Switch to the "Errors" tab
+                    $propsTab.trigger("activate");
+
+                    // Scroll to the error entry
+                    let $scrollParent = $trigger.parents(
+                        ".tota11y-info-section");
+                    $scrollParent[0].scrollTop = $trigger[0].offsetTop - 10;
+                };
+
+                // Attach the `$trigger` as well so can access it externally.
+                // We use this to highlight the trigger when hovering over
+                // inline error labels.
+                prop.$trigger = $trigger;
+
+                // Wire up the scroll-to-error button
+                let $scroll = $prop.find(".tota11y-info-error-scroll");
+                $scroll.click((e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // TODO: This attempts to scroll to fixed elements
+                    $(document).scrollTop(prop.$el.offset().top - 80);
+                });
+
+                // Expand the first violation
+                // if (i === 0) {
+                //     $desc.toggleClass(COLLAPSED_CLASS_NAME);
+                //     $trigger.toggleClass(COLLAPSED_CLASS_NAME);
+                // }
+
+                // Highlight the violating element on hover/focus. We do it
+                // for both $trigger and $scroll to allow users to see the
+                // highlight when scrolling to the element with the button.
+                annotate.toggleHighlight(prop.$el, $trigger);
+                annotate.toggleHighlight(prop.$el, $scroll);
+            });
+
+            $propsTab = $activeTab = this._addTab("Properties", $props);
+        }
+
+
+        // Error list
         if (this.errors.length > 0) {
             let $errors = $("<ul>").addClass("tota11y-info-errors");
 
@@ -301,10 +401,10 @@ class InfoPanel {
                 });
 
                 // Expand the first violation
-                if (i === 0) {
-                    $desc.toggleClass(COLLAPSED_CLASS_NAME);
-                    $trigger.toggleClass(COLLAPSED_CLASS_NAME);
-                }
+                // if (i === 0) {
+                //     $desc.toggleClass(COLLAPSED_CLASS_NAME);
+                //     $trigger.toggleClass(COLLAPSED_CLASS_NAME);
+                // }
 
                 // Highlight the violating element on hover/focus. We do it
                 // for both $trigger and $scroll to allow users to see the

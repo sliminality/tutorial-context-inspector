@@ -23,7 +23,7 @@ module.exports = {
 
     experimental: [
         new A11yTextWand(),
-        new LabelsPlugin(),
+        // new LabelsPlugin(),
         new LandmarksPlugin(),
     ],
 };
