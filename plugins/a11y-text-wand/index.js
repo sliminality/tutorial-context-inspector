@@ -13,6 +13,7 @@ let propListTemplate = require("./prop-list.handlebars");
 require("./style.less");
 
 class A11yTextWand extends Plugin {
+
     getTitle() {
         return "Highlight Elements";
     }
@@ -32,6 +33,7 @@ class A11yTextWand extends Plugin {
 
     run() {
         const that = this;
+        let $highlight;
 
         // Provide a fake summary to force the info panel to render
         // this.summary(" ");
@@ -40,7 +42,6 @@ class A11yTextWand extends Plugin {
         // highlighting and clicking will only work on:
         // div, section, article, aside, nav, header,
         // footer, and menu elements
-        let CONTAINERS_ONLY = true;
         const CONTAINERS = [
             "div",
             "section",
@@ -49,21 +50,25 @@ class A11yTextWand extends Plugin {
             "nav",
             "header",
             "footer",
-            "menu"
+            "menu",
+            "li",
         ];
 
         // Mousemove handler controls highlighting behavior
         $(document).on("mousemove.wand", function(e) {
             const currentEl = document.elementFromPoint(e.clientX, e.clientY);
             const tag = _.toLower(currentEl.tagName);
+            const CONTAINERS_ONLY = that.selectionMode === "BLOCK";
 
             // Don't outline something if it's part of the app,
             // or not a container element when CONTAINERS_ONLY is true
             const invalidTarget = _.some([
+                _.includes(currentEl.tagName, "body"),
                 CONTAINERS_ONLY && !_.includes(CONTAINERS, tag),
                 _.includes(currentEl.className, "tota11y")
             ]);
 
+            // Outline the element currently being hovered over
             if (!invalidTarget) {
                 $(".tota11y-outlined").removeClass("tota11y-outlined");
                 $(currentEl).addClass("tota11y-outlined");
@@ -73,16 +78,27 @@ class A11yTextWand extends Plugin {
         // Click handler gets and displays CSS information
         $(document).on("click", ".tota11y-outlined", function(e) {
 
-            // Stop propagation if we clicked an app element
-            if (this.className.indexOf("tota11y") !== -1 &&
-                this.className.indexOf("tota11y-outlined") === -1) {
-                console.log("clicked on app");
-                // e.preventDefault();
+            // Prevent default if we clicked the application
+            const isApp = this.className.indexOf("tota11y") !== -1;
+            const hasOutline = this.className.indexOf("tota11y-outlined") !== -1;
+
+            // Continue iff the element is outlined
+            if (!hasOutline) {
+                return true;
+            } else {
                 e.stopPropagation();
             }
 
+            // After we stop propagating, set clickedEl
             const clickedEl = this;
+            const $el = $(clickedEl);
             console.log(clickedEl);
+
+            // Control highlighting
+            if ($highlight) {
+                $highlight.remove();
+            }
+            $highlight = annotate.highlight($el);
 
             const partition = el2Partition(clickedEl);
             const propTypeOrder = [
@@ -103,7 +119,6 @@ class A11yTextWand extends Plugin {
                 const props = partition[type];
                 if (Object.keys(props).length > 0) {
                     const title = type.replace("_", " ");  // TODO: change this
-                    const $el = $(clickedEl);
 
                     // Evaluate the prop list template
                     let $list = $(this.propList(props));
@@ -113,11 +128,15 @@ class A11yTextWand extends Plugin {
             }, that);
 
             let propEntries = that.props(propObjList);
-            propEntries.forEach((entry) => {
-                if (entry) {
-                    annotate.errorLabel(entry.$el, "", entry.title, entry);
-                }
-            });
+            // propEntries.forEach((entry) => {
+            //     if (entry) {
+            //         const context = [entry.$el, "", entry.title, entry];
+            //         annotate.errorLabel(...context);
+
+            //         // Highlight the current element on the page
+            //         const highlight = annotate.highlight(entry.$el);
+            //     }
+            // });
 
             // Render updates
             that.panel.render();

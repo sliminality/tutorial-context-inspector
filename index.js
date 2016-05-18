@@ -25,6 +25,7 @@ class Toolbar {
      * the appropriate plugins on and off.
      */
     handlePluginClick(plugin) {
+        console.log(this.activePlugin);
         // If the plugin was already selected, toggle it off
         if (plugin === this.activePlugin) {
             plugin.deactivate();
@@ -98,7 +99,7 @@ class Toolbar {
         $toolbar = (
             <div id="tota11y-toolbar" className="tota11y tota11y-toolbar tota11y-expanded"
                  role="region"
-                 aria-expanded="false">
+                 aria-expanded="true">
                 <div className="tota11y-toolbar-body">
                     {$plugins}
                 </div>

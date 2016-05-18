@@ -206,12 +206,11 @@ class InfoPanel {
                     {this.plugin.getTitle()}
                     <span className="tota11y-info-controls">
                         <label className="tota11y-info-annotation-toggle">
-                            Annotate:
+                            Block Mode:
                             {" "}
                             <input
                                 className="tota11y toggle-annotation"
-                                type="checkbox"
-                                checked="checked" />
+                                type="checkbox" />
                         </label>
                         <a aria-label="Close info panel"
                            href="#"
@@ -238,13 +237,14 @@ class InfoPanel {
             $activeTab = this._addTab("Summary", this.summary);
         }
 
-        // Wire annotation toggling
+        // Hijack annotation toggling feature to toggle selectionMode
         this.$el.find(".toggle-annotation").click((e) => {
             if ($(e.target).prop("checked")) {
-                annotate.show();
+                this.plugin.selectionMode = "BLOCK";
             } else {
-                annotate.hide();
+                this.plugin.selectionMode = null;
             }
+            console.log(this.plugin.selectionMode);
         });
 
         // Prop list

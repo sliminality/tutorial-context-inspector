@@ -156,7 +156,6 @@ module.exports = (namespace) => {
         // is hovered (mouseenter/mouseleave) or focused (focus/blur)
         toggleHighlight($el, $trigger) {
             let $highlight;
-
             $trigger.on("mouseenter focus", () => {
                 if ($highlight) {
                     $highlight.remove();

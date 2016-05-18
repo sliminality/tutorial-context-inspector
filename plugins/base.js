@@ -17,6 +17,10 @@ class Plugin {
     constructor() {
         this.panel = new InfoPanel(this);
         this.$checkbox = null;
+        // selectionMode is either
+        // - CONTAINERS_ONLY
+        // - null
+        this.selectionMode = null;
     }
 
     getTitle() {
