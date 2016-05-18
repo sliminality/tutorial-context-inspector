@@ -33,6 +33,7 @@ class InfoPanel {
         this.summary = null;
         this.errors = [];
         this.props = [];
+        this.nodeInfo = null;
 
         this.$el = null;
     }
@@ -70,6 +71,12 @@ class InfoPanel {
     setProps(props) {
         this.props = props;
         return props;
+    }
+
+    setNodeInfo(selectors) {
+        this.nodeInfo = selectors;
+        console.log(this.nodeInfo);
+        return selectors;
     }
 
     _addTab(title, html) {
@@ -240,16 +247,34 @@ class InfoPanel {
         // Hijack annotation toggling feature to toggle selectionMode
         this.$el.find(".toggle-annotation").click((e) => {
             if ($(e.target).prop("checked")) {
+                console.log("checked");
                 this.plugin.selectionMode = "BLOCK";
             } else {
+                console.log("unchecked");
                 this.plugin.selectionMode = null;
             }
-            console.log(this.plugin.selectionMode);
         });
 
         // Prop list
         if (this.props.length > 0) {
             let $props = $("<ul>").addClass("tota11y-info-errors");
+
+            if (this.nodeInfo) {
+                let $nodeInfo = $("<code>").addClass("tota11y-info-node-info");
+
+                const $tag = $("<span>")
+                                .addClass("tota11y-info-node-info node-info-tag")
+                                .text(this.nodeInfo.tag.toLowerCase());
+                const $id = $("<span>")
+                                .addClass("tota11y-info-node-info node-info-id")
+                                .text(this.nodeInfo.id ? ` #${this.nodeInfo.id}` : "");
+                const $classes = $("<span>")
+                                    .addClass("tota11y-info-node-info node-info-classes")
+                                    .text(` .${Array.from(this.nodeInfo.classList).join(" .")}`);
+
+                $nodeInfo.append($tag, $id, $classes);
+                $props.prepend($nodeInfo);
+            }
 
             // Store a reference to the "Props" tab so we can switch to it
             // later
@@ -281,9 +306,9 @@ class InfoPanel {
                     $desc.toggleClass(COLLAPSED_CLASS_NAME);
                 });
 
-                // Attach a function to the original error object to open
-                // this error so it can be done externally. We'll use this to
-                // access error entries in the info panel from labels.
+                // Attach a function to the original prop object to open
+                // this prop so it can be done externally. We'll use this to
+                // access prop entries in the info panel from labels.
                 prop.show = () => {
                     // Make sure info panel is visible
                     this.$el.removeClass(HIDDEN_CLASS_NAME);
@@ -317,10 +342,11 @@ class InfoPanel {
                 });
 
                 // Expand the first violation
-                // if (i === 0) {
-                //     $desc.toggleClass(COLLAPSED_CLASS_NAME);
-                //     $trigger.toggleClass(COLLAPSED_CLASS_NAME);
-                // }
+                console.log(prop.title);
+                if (prop.title !== "box model" && prop.title !== "position") {
+                    $desc.toggleClass(COLLAPSED_CLASS_NAME);
+                    $trigger.toggleClass(COLLAPSED_CLASS_NAME);
+                }
 
                 // Highlight the violating element on hover/focus. We do it
                 // for both $trigger and $scroll to allow users to see the
@@ -328,8 +354,6 @@ class InfoPanel {
                 annotate.toggleHighlight(prop.$el, $trigger);
                 annotate.toggleHighlight(prop.$el, $scroll);
             });
-
-            console.log($propsTab);
 
             $propsTab = $activeTab = this._addTab("Properties", $props);
         }

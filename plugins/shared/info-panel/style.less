@@ -13,6 +13,10 @@
 @chevornFontSize: 20px;
 @descriptionFontSize: 13px;
 
+@tagFontColor: rgb(191, 63, 140);
+@idFontColor: rgb(63, 76, 191);
+@classesFontColor: rgb(114, 63, 191);
+
 .tota11y-info {
     .tota11y-dark-color-scheme;
     .tota11y-no-select;
@@ -84,6 +88,28 @@
 
         &.active &-anchor-text {
             color: @darkGray;
+        }
+    }
+
+    code&-node-info {
+        margin-bottom: 5px;
+        padding: 5px;
+        font-size: 18px;
+
+        & span {
+            font-family: monospace;
+        }
+
+        & .node-info-tag {
+            color: @tagFontColor;
+        }
+
+        & .node-info-id {
+            color: @idFontColor;
+        }
+
+        & .node-info-classes {
+            color: @classesFontColor;
         }
     }
 

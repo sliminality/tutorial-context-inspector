@@ -12,14 +12,14 @@ let propListTemplate = require("./prop-list.handlebars");
 
 require("./style.less");
 
-class A11yTextWand extends Plugin {
+class Crowdsourcer extends Plugin {
 
     getTitle() {
-        return "Highlight Elements";
+        return "Tag Components";
     }
 
     getDescription() {
-        return "Hover over elements to view their CSS";
+        return "Tag the components on the page";
     }
 
     // Takes an object of properties,
@@ -33,10 +33,12 @@ class A11yTextWand extends Plugin {
 
     run() {
         const that = this;
-        let $highlight, $label;
+        let count = 0;
+        let $highlights = [];
+        let selections = [];
 
         // Provide a fake summary to force the info panel to render
-        // this.summary(" ");
+        this.summary("Click on all the elements that form major layout components of the page");
 
         // When CONTAINERS_ONLY is active,
         // highlighting and clicking will only work on:
@@ -58,7 +60,7 @@ class A11yTextWand extends Plugin {
         $(document).on("mousemove.wand", function(e) {
             const currentEl = document.elementFromPoint(e.clientX, e.clientY);
             const tag = _.toLower(currentEl.tagName);
-            const CONTAINERS_ONLY = that.selectionMode === "BLOCK";
+            const CONTAINERS_ONLY = true;  // for crowdsourcing
 
             // Don't outline something if it's part of the app,
             // or not a container element when CONTAINERS_ONLY is true
@@ -94,24 +96,18 @@ class A11yTextWand extends Plugin {
             const $el = $(clickedEl);
             console.log(clickedEl);
 
-            if ($label) {
-                $label.remove();
-            }
-            $label = annotate.label($el);
 
             // Send info to panel
-            that.nodeInfo({
+            selections.push({
+                node: $el,
                 tag: clickedEl.tagName,
                 classList: clickedEl.classList,
                 id: clickedEl.id,
             });
 
             // Control highlighting
-            if ($highlight) {
-                $highlight.remove();
-                $(".tota11y-highlight").remove();
-            }
-            $highlight = annotate.highlight($el);
+            $highlights.push(annotate.highlight($el, count));
+            count += 1;
 
             // Partition the style properties
             const partition = el2Partition(clickedEl);
@@ -184,4 +180,4 @@ class A11yTextWand extends Plugin {
     }
 }
 
-module.exports = A11yTextWand;
+module.exports = Crowdsourcer;

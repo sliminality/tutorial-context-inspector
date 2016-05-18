@@ -9,6 +9,7 @@
 // let HeadingsPlugin = require("./headings");
 let LabelsPlugin = require("./labels");
 let LandmarksPlugin = require("./landmarks");
+let Crowdsourcer = require("./crowdsourcer");
 // let LinkTextPlugin = require("./link-text");
 let A11yTextWand = require("./a11y-text-wand");
 
@@ -23,6 +24,7 @@ module.exports = {
 
     experimental: [
         new A11yTextWand(),
+        new Crowdsourcer(),
         // new LabelsPlugin(),
         new LandmarksPlugin(),
     ],

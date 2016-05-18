@@ -17,6 +17,7 @@ class Plugin {
     constructor() {
         this.panel = new InfoPanel(this);
         this.$checkbox = null;
+
         // selectionMode is either
         // - CONTAINERS_ONLY
         // - null
@@ -54,6 +55,12 @@ class Plugin {
     // Replaces the entries in the info panel's "Props" tab
     props(propObjs) {
         return this.panel.setProps(propObjs);
+    }
+
+    // Updates nodeInfo field with an object containing
+    // information about a node's tagName, classList, and id
+    nodeInfo(selectors) {
+        return this.panel.setNodeInfo(selectors);
     }
 
     /**

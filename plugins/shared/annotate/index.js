@@ -143,8 +143,9 @@ module.exports = (namespace) => {
 
         // Highlights a given jQuery element by placing a translucent
         // rectangle directly over it
-        highlight($el) {
-            let $highlight = createAnnotation($el, "tota11y-highlight");
+        highlight($el, n=0) {
+            const suffix = n > 0 ? `-${n.toString()}` : "";
+            let $highlight = createAnnotation($el, `tota11y-highlight${suffix}`);
             return $highlight.css({
                 // include margins
                 width: Math.max(MIN_HIGHLIGHT_SIZE, $el.outerWidth(true)),
